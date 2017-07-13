@@ -10,7 +10,6 @@ namespace TesseractNative
         std::string value;
         std::string errorMessage;
     };
-
 };
 
 #endif // TESSERACT_NATIVE_RESULT_H_
