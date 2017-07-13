@@ -1,5 +1,6 @@
 #ifndef TESSERACT_NATIVE_WORKER_H_
 #define TESSERACT_NATIVE_WORKER_H_
+#include "Task.h"
 
 namespace TesseractNative
 {
@@ -13,14 +14,17 @@ namespace TesseractNative
     class Worker
     {
     public:
-        Worker();
-        ~Worker();
+        /**
+         * Working class hero.
+         */
+        Worker(const unsigned int& id);
 
+        ~Worker();
 
         /**
          * Get the workers application-unique id.
          */
-        __inline const long& GetId() const { return this->id; }
+        __inline const long& GetId() const { return this->identity; }
         
         /**
          * Check if the worker is currently in "active" state, i.e., working.
@@ -38,8 +42,9 @@ namespace TesseractNative
 
     private:
 
-        long id;
+        unsigned int identity;
         bool active;
+        Task* task;
     };
 
 };

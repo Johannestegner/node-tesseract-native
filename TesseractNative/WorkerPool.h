@@ -2,6 +2,10 @@
 #define TESSERACT_NATIVE_WORKER_POOL_H_
 #include <vector>
 #include "Worker.h"
+#include <queue>
+#include "Task.h"
+#include <functional>
+#include "Result.h"
 
 namespace TesseractNative
 {
@@ -26,13 +30,37 @@ namespace TesseractNative
             return instance;
         }
 
+        /**
+         * Add a task to the queue.
+         */
+        const bool& Enqueue(const Task& task, const std::function<Result>& callback);
+
 
         WorkerPool(const WorkerPool&) = delete;
         void operator=(const WorkerPool&) = delete;
 
     private:
-        std::vector<Worker*> workers;
+
+        /**
+        * Struct to hold a task and the callback connected to it.
+        */
+        struct WorkerTask
+        {
+            WorkerTask(const Task& task, const std::function<Result>& callback)
+                : task(task),
+                  callback(callback)
+            {
+            }
+
+            const Task& task;
+            const std::function<Result>& callback;
+        };
+
+        std::vector<Worker> workers;
+        std::queue<WorkerTask> tasks;
+
         WorkerPool();
+
     };
 
 };
