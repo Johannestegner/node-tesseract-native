@@ -2,6 +2,8 @@
 #define TESSERACT_NATIVE_API_H_
 
 #include "TesseractOptions.h"
+#include <string>
+#include "Result.h"
 
 /**
  * Public API.
@@ -16,7 +18,7 @@ public:
      * Get the single API instance.
      * Using singleton pattern.
      */
-    __inline static const Api& GetInstance()
+    __inline static Api& GetInstance()
     {
         static Api api;
         return api;
@@ -27,26 +29,26 @@ public:
      * @param filePath Path to the file to process.
      * @param options Options to use.
      */
-    const char* Process(const char* filePath, const TesseractNative::Options& options);
+    TesseractNative::Result Process(std::string filePath, const TesseractNative::Options& options);
 
     /**
      * Process image from data.
      * @param image 2D integer array with image data. (for now, this will change...)
      * @param options Options to use.
      */
-    const char* Process(const int** image, const TesseractNative::Options& options);
+    TesseractNative::Result Process(const int** image, const TesseractNative::Options& options);
 
     /**
     * Process image from file path.
     * @param filePath Path to the file to process.
     */
-    const char* Process(const char* filePath);
+    TesseractNative::Result Process(std::string filePath);
 
     /**
     * Process image from data.
     * @param image 2D integer array with image data. (for now, this will change...)
     */
-    const char* Process(const int** image);
+    TesseractNative::Result Process(const int** image);
 
 private:
 
@@ -54,6 +56,8 @@ private:
     void operator=(const Api&) = delete;
 
     Api();
+
+
 };
 
 #endif // TESSERACT_NATIVE_API_H_
