@@ -4,12 +4,23 @@
 
 namespace TesseractNative
 {
-    struct Result
+    class Result
     {
+
+        Result()
+        {
+        }
+
+        ~Result()
+        {
+        }
+
         bool error;
         std::string value;
         std::string errorMessage;
     };
+
+
 };
 
 #endif // TESSERACT_NATIVE_RESULT_H_

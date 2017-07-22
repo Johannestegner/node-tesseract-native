@@ -1,16 +1,23 @@
 #ifndef TESSERACT_H_
 #define TESSERACT_H_
 
-class tesseract
+
+
+/**
+ * The tesseract class is the public interface which will be exposed to node js.
+ */
+class Tesseract
 {
 public:
 
-    tesseract()
+    Tesseract()
     {
+        
     }
 
-    ~tesseract()
+    ~Tesseract()
     {
+        
     }
 
 private:
@@ -18,3 +25,4 @@ private:
 };
 
 #endif
+
