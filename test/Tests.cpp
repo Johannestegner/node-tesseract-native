@@ -3,7 +3,6 @@
 int main(int argc, char **argv) {
     // Run the tests!
     ::testing::InitGoogleTest(&argc, argv);
-    ::testing::GTEST_FLAG(filter) = "*";
     return RUN_ALL_TESTS();
 }
 

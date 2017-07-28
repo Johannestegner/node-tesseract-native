@@ -16,7 +16,7 @@ namespace TesseractNative
         {
             error = true;
             errorMessage = "Unknown error";
-            value = nullptr;
+            value = "";
         }
 
         ~Result() { }

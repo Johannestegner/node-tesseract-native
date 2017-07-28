@@ -18,6 +18,11 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="resources\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{6E4C9758-D5B2-4BE0-A225-E5F80FD386A9}</ProjectGuid>
@@ -76,19 +81,25 @@
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <Linkage-gtest>static</Linkage-gtest>
     <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-    <OutDir>$(ProjectDir)..\bin\$(Configuration)</OutDir>
+    <OutDir>$(ProjectDir)..\bin\$(Configuration)\</OutDir>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <Linkage-gtest>static</Linkage-gtest>
     <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-    <OutDir>$(ProjectDir)..\bin\$(Configuration)</OutDir>
+    <OutDir>$(ProjectDir)..\bin\$(Configuration)\</OutDir>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <Linkage-gtest>static</Linkage-gtest>
     <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-    <OutDir>$(ProjectDir)..\bin\$(Configuration)</OutDir>
+    <OutDir>$(ProjectDir)..\bin\$(Configuration)\</OutDir>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -96,7 +107,9 @@
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <Linkage-gtest>static</Linkage-gtest>
     <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-    <OutDir>$(ProjectDir)..\bin\$(Configuration)</OutDir>
+    <OutDir>$(ProjectDir)..\bin\$(Configuration)\</OutDir>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -165,19 +178,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ApiTests.cpp" />
     <ClCompile Include="Tests.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TesseractNative\TesseractNative.vcxproj">
-      <Project>{c063b564-1c6a-4dbb-807f-9ccac8b6c0cc}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -56,8 +56,6 @@ private:
     void operator=(const Api&) = delete;
 
     Api();
-
-
 };
 
 #endif // TESSERACT_NATIVE_API_H_

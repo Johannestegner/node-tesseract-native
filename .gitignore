@@ -36,3 +36,5 @@ Debug/
 Release/
 .vs/
 packages/
+.idea/
+cmake-build-debug/

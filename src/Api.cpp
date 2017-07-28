@@ -1,6 +1,14 @@
 #include "Api.h"
 #include "Result.h"
 
+#include <iostream>
+#include <memory>
+#include <allheaders.h>
+
+#include <baseapi.h>
+
+using namespace tesseract;
+
 TesseractNative::Result Api::Process(std::string filePath, const TesseractNative::Options& options)
 {
     return TesseractNative::Result();
@@ -13,7 +21,9 @@ TesseractNative::Result Api::Process(const int** image, const TesseractNative::O
 
 TesseractNative::Result Api::Process(std::string filePath)
 {
-    return TesseractNative::Result();
+
+    return TesseractNative::Result{};
+
 }
 
 TesseractNative::Result Api::Process(const int** image)
@@ -23,4 +33,6 @@ TesseractNative::Result Api::Process(const int** image)
 
 Api::Api()
 {
+
+
 }
