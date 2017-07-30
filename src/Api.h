@@ -4,6 +4,9 @@
 #include "TesseractOptions.h"
 #include <string>
 #include "Result.h"
+namespace tesseract {
+    class TessBaseAPI;
+}
 
 /**
  * Public API.
@@ -51,6 +54,7 @@ public:
     TesseractNative::Result Process(const int** image);
 
 private:
+    tesseract::TessBaseAPI* tess;
 
     Api(const Api&) = delete;
     void operator=(const Api&) = delete;
