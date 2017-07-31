@@ -1,6 +1,6 @@
 #include "Api.h"
-#include <allheaders.h>
-#include <baseapi.h>
+#include <leptonica/allheaders.h>
+#include <tesseract/baseapi.h>
 
 using namespace tesseract;
 

@@ -34,9 +34,12 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 add_subdirectory( ${GOOGLE_TEST_DIR}/src  ${GOOGLE_TEST_DIR}/build )
 
-file(GLOB SRCS */*.cpp)
+file(GLOB SRCS *.cpp)
 
-add_executable(${TEST_NAME} ${SRCS})
+add_executable(
+        ${TEST_NAME}
+        ${SRCS}
+)
 
 target_link_libraries(${TEST_NAME}
         ${PROJECT_NAME}
