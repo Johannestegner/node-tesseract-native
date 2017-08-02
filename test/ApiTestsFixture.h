@@ -1,22 +1,24 @@
-#ifndef TESSERACT_NATIVE_APITESTS_H
-#define TESSERACT_NATIVE_APITESTS_H
-
-#include <gtest/gtest.h>
 #if defined(_WIN32) || defined(__CYGWIN__)
 #include <Windows.h>
 #endif
-
 #include <fstream>
 
-class ApiTest : public ::testing::Test
+#ifndef TESSERACT_NATIVE_APITESTSFIXTURE_H
+#define TESSERACT_NATIVE_APITESTSFIXTURE_H
+
+class ApiTestsFixture : public ::testing::Test
 {
 protected:
-    virtual void SetUp() override {
+    __inline void SetUp() override {
         std::string exeDir = GetExeDir();
         filePaths.push_back(exeDir + "\\resources\\test.bmp");
         filePaths.push_back(exeDir + "\\resources\\test.jpg");
         filePaths.push_back(exeDir + "\\resources\\test.png");
         filePaths.push_back(exeDir + "\\resources\\test.tif");
+    }
+
+    __inline void TearDown() override {
+        filePaths.clear();
     }
 
     std::vector<std::string > filePaths;
@@ -28,6 +30,10 @@ protected:
         return result;
     }
 
+    /**
+     * Get executable directory for current executable.
+     * @return Executable dir as string.
+     */
     std::string GetExeDir()
     {
 #if defined(_WIN32) || defined(__CYGWIN__)
@@ -49,4 +55,5 @@ protected:
 
 };
 
-#endif //TESSERACT_NATIVE_APITESTS_H
+
+#endif //TESSERACT_NATIVE_APITESTSFIXTURE_H

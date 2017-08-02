@@ -19,12 +19,15 @@ set(SOURCE_FILES
     Result.h
     TesseractOptions.h
 )
+#file(GLOB SOURCE_FILES *.cpp *.h */*.cpp */*.h)
 
-add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})
+
+add_library(${PROJECT_NAME} ${SOURCE_FILES})
 
 message("Library created.")
 
-target_include_directories(${PROJECT_NAME} PUBLIC
+target_include_directories(
+        ${PROJECT_NAME} PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
 )
 

@@ -1,6 +1,4 @@
 #include "Api.h"
-#include <leptonica/allheaders.h>
-#include <tesseract/baseapi.h>
 
 using namespace tesseract;
 
@@ -26,7 +24,6 @@ TesseractNative::Result Api::Process(std::string filePath)
     result.value = out;
 
     return result;
-
 }
 
 TesseractNative::Result Api::Process(const int** image)
@@ -36,7 +33,18 @@ TesseractNative::Result Api::Process(const int** image)
 
 Api::Api()
 {
-    this->tess = new tesseract::TessBaseAPI();
-    this->tess->Init(nullptr, "eng");
+    tess = new tesseract::TessBaseAPI();
+    tess->Init(nullptr, "eng");
+}
 
+Api::~Api()
+{
+    tess->End();
+    delete(tess);
+    tess = nullptr;
+}
+
+Api::Api(const Api &cpy)
+{
+    this->tess = cpy.tess;
 }

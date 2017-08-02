@@ -4,9 +4,8 @@
 #include "TesseractOptions.h"
 #include <string>
 #include "Result.h"
-namespace tesseract {
-    class TessBaseAPI;
-}
+#include <leptonica/allheaders.h>
+#include <tesseract/baseapi.h>
 
 /**
  * Public API.
@@ -16,16 +15,11 @@ namespace tesseract {
 class Api
 {
 public:
+    Api();
+    Api(const Api& cpy);
+    ~Api();
 
-    /**
-     * Get the single API instance.
-     * Using singleton pattern.
-     */
-    __inline static Api& GetInstance()
-    {
-        static Api api;
-        return api;
-    }
+
 
     /**
      * Process image from file path.
@@ -56,10 +50,6 @@ public:
 private:
     tesseract::TessBaseAPI* tess;
 
-    Api(const Api&) = delete;
-    void operator=(const Api&) = delete;
-
-    Api();
 };
 
 #endif // TESSERACT_NATIVE_API_H_
