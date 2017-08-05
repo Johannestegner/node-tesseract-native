@@ -3,7 +3,7 @@
 
 namespace TesseractNative
 {
-    struct Options
+    class Options
     {
         
     };

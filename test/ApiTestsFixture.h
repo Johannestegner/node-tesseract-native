@@ -2,9 +2,11 @@
 #include <Windows.h>
 #endif
 #include <fstream>
+#include <Api.h>
 
 #ifndef TESSERACT_NATIVE_APITESTSFIXTURE_H
 #define TESSERACT_NATIVE_APITESTSFIXTURE_H
+
 
 class ApiTestsFixture : public ::testing::Test
 {
@@ -15,10 +17,13 @@ protected:
         filePaths.push_back(exeDir + "\\resources\\test.jpg");
         filePaths.push_back(exeDir + "\\resources\\test.png");
         filePaths.push_back(exeDir + "\\resources\\test.tif");
+
+        api = new Api();
     }
 
     __inline void TearDown() override {
         filePaths.clear();
+        delete(api);
     }
 
     std::vector<std::string > filePaths;
@@ -52,6 +57,8 @@ protected:
 #endif
         return res.substr(0, res.find_last_of('\\'));
     }
+
+    Api* api;
 
 };
 

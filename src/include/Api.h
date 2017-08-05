@@ -4,7 +4,6 @@
 #include "TesseractOptions.h"
 #include <string>
 #include "Result.h"
-#include <leptonica/allheaders.h>
 #include <tesseract/baseapi.h>
 
 /**

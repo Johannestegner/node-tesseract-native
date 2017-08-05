@@ -1,25 +1,22 @@
-#ifndef TESSERACT_NATIVE_RESULT_H_
-#define TESSERACT_NATIVE_RESULT_H_
-#include <string>
+#ifndef TESSERACT_NATIVE_RESULT_H
+#define TESSERACT_NATIVE_RESULT_H
+
+#include <iostream>
 
 namespace TesseractNative
 {
     /**
      * Result structure which is returned from any Api.Process calls.
      * Either contains the string value of the processed image or an
-     * error message. 
+     * error message.
      * In case of error, the `error` boolean member will be set to true.
      */
-    struct Result
+    class Result
     {
-        Result()
-        {
-            error = true;
-            errorMessage = "Unknown error";
-            value = "";
-        }
+    public:
+        Result();
+        ~Result() = default;
 
-        ~Result() { }
 
         bool error;
         std::string value;
@@ -27,4 +24,6 @@ namespace TesseractNative
     };
 };
 
-#endif // TESSERACT_NATIVE_RESULT_H_
+
+
+#endif //TESSERACT_NATIVE_RESULT_H

@@ -1,43 +1,75 @@
 cmake_minimum_required(VERSION 3.6)
+project(TEST_NAME)
 
-message("Building the ${PROJECT_NAME} library from /src directory...")
+######################################################
+#
+# Libleptonica download and build.
+#
+######################################################
+
+set(LEPTONICA_DIR "${CMAKE_CURRENT_BINARY_DIR}/leptonica")
 
 
-#############################################
-## Leptonica
-#############################################
-#set(LEPTONICA_DIR ${CMAKE_CURRENT_BINARY_DIR}/leptonica)
-
-#set(TESSERACT_DIR ${CMAKE_CURRENT_BINARY_DIR}/tesseract)
-#configure_file(cmake/External_tesseract.cmake tesseract/download/CMakeLists.txt)
-
-#add_subdirectory(${TESSERACT_DIR}/src ${TESSERACT_DIR}/build)
-
-set(SOURCE_FILES
-    Api.cpp
-    Api.h
-    Result.h
-    TesseractOptions.h
+configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/External_leptonica.cmake
+    ${LEPTONICA_DIR}/download/CMakeLists.txt
 )
-#file(GLOB SOURCE_FILES *.cpp *.h */*.cpp */*.h)
 
+execute_process(
+    COMMAND ${CMAKE_COMMAND} -G ${CMAKE_GENERATOR} .
+    RESULT_VARIABLE result
+    WORKING_DIRECTORY ${LEPTONICA_DIR}/download
+)
 
+if(result)
+    message(FATAL_ERROR "CMake step for leptonica failed: ${result}")
+endif()
+
+execute_process(
+    COMMAND bash ${LEPTONICA_DIR}/src/make-for-local
+    RESULT_VARIABLE result
+    WORKING_DIRECTORY ${LEPTONICA_DIR}/src
+)
+
+execute_process(
+    COMMAND make
+    RESULT_VARIABLE result
+    WORKING_DIRECTORY ${LEPTONICA_DIR}/src
+)
+
+if(result)
+    message(FATAL_ERROR "Build step for leptonica failed: ${result}")
+endif()
+
+######################################################
+#
+# Libleptonica test download and build end.
+#
+######################################################
+
+file(GLOB SOURCE_FILES *.cpp *.h */*.cpp */*.h)
 add_library(${PROJECT_NAME} ${SOURCE_FILES})
 
-message("Library created.")
 
 target_include_directories(
-        ${PROJECT_NAME} PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}
+    ${PROJECT_NAME} PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+    PRIVATE src
 )
 
-find_library(TESS tesseract)
-find_library(LEPT leptonica)
-
-target_link_libraries(
-        ${PROJECT_NAME}
-        ${TESS}
-        ${LEPT}
+add_subdirectory(
+    ${LEPTONICA_DIR}/src
+    ${LEPTONICA_DIR}/build
 )
 
-message("Library created and done...")
+#find_library(TESS tesseract REQUIRED)
+#find_library(LEPT lept REQUIRED)
+
+#target_link_libraries(
+  #  ${PROJECT_NAME}
+ #   ${TESS}
+ #   ${LEPT}
+#)
+
+message(STATUS "Library ${PROJECT_NAME} created and done...")
